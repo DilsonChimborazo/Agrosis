@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     #apps de iot 
     'apps.iot.sensores',
     'apps.iot.mide',
+    'apps.iot.lote',
+    'apps.iot.eras',
+    'apps.iot.ubicacion',
     'apps.inventario',
 ]
 
