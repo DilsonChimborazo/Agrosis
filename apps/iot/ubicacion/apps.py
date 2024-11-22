@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class IotConfig(AppConfig):
+class UbicacionConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.iot'
+    name = 'ubicacion'

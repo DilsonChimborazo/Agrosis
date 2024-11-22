@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'apps.usuario',
     'apps.finanzas',
     'apps.trazabilidad',
-    'apps.iot',
-    'apps.inventario'
+    #apps de iot 
+    'apps.iot.sensores',
+    'apps.iot.mide',
+    'apps.inventario',
 ]
 
 MIDDLEWARE = [

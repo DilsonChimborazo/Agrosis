@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from apps.iot.models import Sensores, Mide
-from apps.iot.api.serializers import SensoresSerializer,MideSerializer
+from apps.sensores.models import Sensores, Mide
+from apps.sensores.api.serializers import SensoresSerializer,MideSerializer
 
 class SensoresViewSet(ModelViewSet):
     queryset = Sensores.objects.all()

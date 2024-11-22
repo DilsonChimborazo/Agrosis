@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from apps.iot.models import Sensores, Mide
+from apps.sensores.models import Sensores, Mide
 
 class SensoresSerializer(ModelSerializer):
     class Meta:

@@ -18,7 +18,9 @@ from django.contrib import admin
 from django.urls import path,include
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from apps.iot.api.router import router_Sensores, router_Mide
+
+#routers de la rama de iot 
+from apps.iot.sensores.api.router import router_Sensores
 
 schema_view = get_schema_view(
    openapi.Info(
