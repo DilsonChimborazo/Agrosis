@@ -1,5 +1,7 @@
 
 from django.db import models
+from apps.inventario.models import *
+from apps.usuario.models import *
 
 # Create your models here.
 
@@ -110,7 +112,7 @@ class Realiza(models.Model):
     def __str__(self):
         return f'{self.fk_id_cultivo}{self.fk_id_actividad}'
 
-class Asignacion_Actividades(models.Model):
+class AsignacionActividades(models.Model):
     fecha = models.DateField()
     observaciones = models.TextField() 
     fk_id_actividad = models.ForeignKey(Actividad, on_delete=models.SET_NULL, null=True)
@@ -118,7 +120,7 @@ class Asignacion_Actividades(models.Model):
     
     def __str__(self): return f'{self.fk_id_actividad} - {self.id_identificacion}'
 
-class Calendario_Lunar(models.Model):
+class CalendarioLunar(models.Model):
     fecha = models.DateField()
     descripcion_evento = models.TextField()
     evento = models.CharField(max_length=100)
@@ -130,8 +132,8 @@ class Programacion(models.Model):
     estado = models.CharField(max_length=50) 
     fecha_programada = models.DateTimeField() 
     duracion = models.DurationField()
-    fk_id_asignacionActividades = models.ForeignKey(Asignacion_Actividades, on_delete=models.SET_NULL, null=True)
-    fk_id_calendario = models.ForeignKey(Calendario_Lunar, on_delete=models.SET_NULL, null=True) 
+    fk_id_asignacionActividades = models.ForeignKey(AsignacionActividades, on_delete=models.SET_NULL, null=True)
+    fk_id_calendario = models.ForeignKey(CalendarioLunar, on_delete=models.SET_NULL, null=True) 
     
     def __str__(self): return f'{self.estado} - {self.fecha_programada}'
 
@@ -148,3 +150,5 @@ class ControlUsoInsumo(models.Model):
     cantidad = models.DecimalField(max_digits=10, decimal_places=2)
     
     def __str__(self): return f'{self.fk_id_insumo} - {self.cantidad}'
+
+

@@ -1,7 +1,5 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
+from apps.trazabilidad.models import *
 
 class Insumos(models.Model):
     unidad_medida=[
@@ -51,14 +49,14 @@ class Herramientas(models.Model):
 
 class Requiere(models.Model):
         fk_id_herramientas = models.ForeignKey(Herramientas, on_delete=models.SET_NULL , null=True) 
-        fk_id_asignacion_actividades =models.ForeignKey(asignacion_actividades, on_delete=models.SET_NULL , null=True) 
+        fk_id_asignacion_actividades =models.ForeignKey(AsignacionActividades, on_delete=models.SET_NULL , null=True) 
         
         def __str__(self):
             return self.fk_id_herramientas.nombre_h
         
 class Utiliza(models.Model):
         fk_id_insumo = models.ForeignKey(Insumos, on_delete=models.SET_NULL , null=True) 
-        fk_id_asignacion_actividades =models.ForeignKey(asignacion_actividades, on_delete=models.SET_NULL , null=True) 
+        fk_id_asignacion_actividades =models.ForeignKey(AsignacionActividades, on_delete=models.SET_NULL , null=True) 
         
         def __str__(self):
             return self.fk_id_insumo.nombre
