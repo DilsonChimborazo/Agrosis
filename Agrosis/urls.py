@@ -23,6 +23,7 @@ from drf_yasg import openapi
 from apps.iot.sensores.api.router import router_Sensores
 from apps.iot.ubicacion.api.router import router_Ubicacion
 from apps.iot.lote.api.router import router_Lote
+from apps.iot.eras.api.router import router_Eras
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -43,4 +44,5 @@ urlpatterns = [
     path('api/sensores',include(router_Sensores.urls)),
     path('api/ubicacion',include(router_Ubicacion.urls)),
     path('api/lote', include(router_Lote.urls)),
+    path('api/eras',include(router_Eras.urls)),
 ]
