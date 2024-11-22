@@ -37,9 +37,6 @@ class NotificacionModelViewSet(ModelViewSet):
     queryset = Notificacion.objects.all()
     serializer_class = NotificacionSerializer
 
-class ControlUsoInsumoModelViewSet(ModelViewSet):
-    queryset = ControlUsoInsumo.objects.all()
-    serializer_class = ControlUsoInsumoSerializer
 
 class CalendarioLunarModelViewSet(ModelViewSet):
     queryset = CalendarioLunar.objects.all()

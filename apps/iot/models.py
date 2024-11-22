@@ -13,7 +13,7 @@ class Sensores(models.Model):
         return self.nombre_sensor
     
 
-class Mide(models.model):
+class Mide(models.Model):
     fk_id_sensor = models.ForeignKey(Sensores, on_delete=models.SET_NULL, null=True)
     fk_id_era = models.ForeignKey(Eras, on_delete=models.SET_NULL , null=True)
 

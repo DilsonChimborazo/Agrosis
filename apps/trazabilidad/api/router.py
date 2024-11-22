@@ -15,7 +15,6 @@ router_trazabilidad.register(prefix='semilleros', viewset=SemilleroModelViewSet,
 router_trazabilidad.register(prefix='asignaciones_actividades', viewset=AsignacionActividadModelViewSet, basename='asignaciones_actividades')
 router_trazabilidad.register(prefix='programaciones', viewset=ProgramacionModelViewSet, basename='programaciones')
 router_trazabilidad.register(prefix='notificaciones', viewset=NotificacionModelViewSet, basename='notificaciones')
-router_trazabilidad.register(prefix='control_uso_insumos', viewset=ControlUsoInsumoModelViewSet, basename='control_uso_insumos')
 router_trazabilidad.register(prefix='calendario_lunar', viewset=CalendarioLunarModelViewSet, basename='calendario_lunar')
 router_trazabilidad.register(prefix='ubicacion',viewset= UbicacionModelViewSet, basename='ubicacion')
 router_trazabilidad.register(prefix='lote',viewset= LoteModelViewSet, basename='lote')

@@ -23,3 +23,7 @@ class UtilizaViewset(ModelViewSet):
     queryset=Utiliza.objects.all()
     serializer_class=UtilizaSerializer
 
+class ControlUsoInsumoModelViewSet(ModelViewSet):
+    queryset = ControlUsoInsumo.objects.all()
+    serializer_class = ControlUsoInsumoSerializer
+

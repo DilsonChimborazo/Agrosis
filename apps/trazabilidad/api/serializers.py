@@ -43,11 +43,6 @@ class NotificacionSerializer(serializers.ModelSerializer):
         model = Notificacion
         fields = '__all__'
 
-class ControlUsoInsumoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ControlUsoInsumo
-        fields = '__all__'
-
 class CalendarioLunarSerializer(serializers.ModelSerializer):
     class Meta:
         model = CalendarioLunar

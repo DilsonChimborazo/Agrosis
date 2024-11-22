@@ -21,3 +21,8 @@ class UtilizaSerializer(ModelSerializer):
     class Meta:
         model= Utiliza
         fields = '__all__'
+
+class ControlUsoInsumoSerializer(ModelSerializer):
+    class Meta:
+        model = ControlUsoInsumo
+        fields = '__all__'
