@@ -22,6 +22,7 @@ from drf_yasg import openapi
 #routers de la rama de iot 
 from apps.iot.sensores.api.router import router_Sensores
 from apps.iot.ubicacion.api.router import router_Ubicacion
+from apps.iot.lote.api.router import router_Lote
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -41,4 +42,5 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api/sensores',include(router_Sensores.urls)),
     path('api/ubicacion',include(router_Ubicacion.urls)),
+    path('api/lote', include(router_Lote.urls)),
 ]
