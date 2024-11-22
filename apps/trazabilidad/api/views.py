@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from apps.trazabilidad.models import Actividad, Realiza, Especie, TipoCultivo, Semillero, AsignacionActividades, Programacion, Notificacion, ControlUsoInsumo, CalendarioLunar, Ubicacion,Lote,Eras,Plantacion,Desarrollan,Pea,Desarrollan,Tipo_residuos,Cultivo,Residuos,Control_fitosanitario
-from apps. trazabilidad.api.serializers import ActividadSerializer, RealizaSerializer, EspecieSerializer, TipoCultivoSerializer, SemilleroSerializer, AsignacionActividadSerializer, ProgramacionSerializer, NotificacionSerializer, ControlUsoInsumoSerializer,CalendarioLunarSerializer, UbicacionSerializer, LoteSerializer, ErasSerializer, CultivoSerializer, PlantacionSerializer, PeaSerializer, DesarrollanSerializer, Tipo_residuosSerializer, ResiduosSerializer, Control_fitosanitarioSerializer
+from apps.trazabilidad.models import *
+from apps. trazabilidad.api.serializers import *
 
 
 #p

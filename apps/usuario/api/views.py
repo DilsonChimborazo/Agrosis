@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from apps.usuario.models import Rol, Usuario
-from apps.usuario.serializer import RolSerializer, UsuarioSerializer
+from apps.usuario.api.serializer import RolSerializer, UsuarioSerializer
 from apps.usuario.api.permissions import IsUsuarioReadOnly
 class RolViewSet(ModelViewSet):
     queryset = Rol.objects.all()

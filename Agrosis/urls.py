@@ -1,10 +1,14 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from apps.trazabilidad.api.router import router_actividad, router_asignacion_actividad, router_control_uso_insumo, router_especie, router_notificacion, router_programacion, router_realiza, router_semillero, router_tipo_cultivo, router_calendario_lunar, router_ubicacion, router_lote, router_eras, router_cultivo, router_plantacion, router_pea, router_desarrollan, router_tipo_residuos, router_residuos, router_control_fitosanitario
+from apps.trazabilidad.api.router import *
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from apps.inventario.api.routers import router_inventario
+from apps.finanzas.api.router import router_ventas
+from apps.iot.api.router import router_iot
+from apps.usuario.api.router import router_usuario
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -19,7 +23,12 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+   path('admin/', admin.site.urls),
+   path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+   path('api/finanzas', include(router_ventas.urls)),
+   path('api/inventario', include(router_inventario.urls)),
+   path('api/iot', include(router_iot.urls)),
+   path('api/trazabilidad', include(router_trazabilidad.urls)),
+   path('api/usuario/', include(router_usuario.urls)),
 ]

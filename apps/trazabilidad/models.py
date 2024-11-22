@@ -28,7 +28,6 @@ class Semillero(models.Model):
 
     def __str__(self): return self.nombre_semillero
     
-   
     
 #x    
 
@@ -44,7 +43,7 @@ class Lote(models.Model):
     fk_id_ubicacion = models.ForeignKey(Ubicacion, on_delete=models.SET_NULL, null=True)
     estado = models.CharField(max_length=100, choices= opcion, default="disponible")
     def __str__(self): return self.nombre_lote
-   
+
 class Eras(models.Model):
     descripcion = models.CharField(max_length=300)
     fk_id_lote = models.ForeignKey(Lote, on_delete=models.SET_NULL, null=True)  
@@ -111,15 +110,15 @@ class Realiza(models.Model):
     def __str__(self):
         return f'{self.fk_id_cultivo}{self.fk_id_actividad}'
 
-class AsignacionActividades(models.Model):
+class Asignacion_Actividades(models.Model):
     fecha = models.DateField()
     observaciones = models.TextField() 
     fk_id_actividad = models.ForeignKey(Actividad, on_delete=models.SET_NULL, null=True)
-    id_identificacion = models.ForeignKey(Identificacion, on_delete=models.SET_NULL, null=True)
+    id_identificacion = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
     
     def __str__(self): return f'{self.fk_id_actividad} - {self.id_identificacion}'
 
-class CalendarioLunar(models.Model):
+class Calendario_Lunar(models.Model):
     fecha = models.DateField()
     descripcion_evento = models.TextField()
     evento = models.CharField(max_length=100)
@@ -131,8 +130,8 @@ class Programacion(models.Model):
     estado = models.CharField(max_length=50) 
     fecha_programada = models.DateTimeField() 
     duracion = models.DurationField()
-    fk_id_asignacionActividades = models.ForeignKey(AsignacionActividades, on_delete=models.SET_NULL, null=True)
-    fk_id_calendario = models.ForeignKey(CalendarioLunar, on_delete=models.SET_NULL, null=True) 
+    fk_id_asignacionActividades = models.ForeignKey(Asignacion_Actividades, on_delete=models.SET_NULL, null=True)
+    fk_id_calendario = models.ForeignKey(Calendario_Lunar, on_delete=models.SET_NULL, null=True) 
     
     def __str__(self): return f'{self.estado} - {self.fecha_programada}'
 
@@ -144,7 +143,7 @@ class Notificacion(models.Model):
     def __str__(self): return self.titulo
 
 class ControlUsoInsumo(models.Model):
-    fk_id_insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE) 
+    fk_id_insumo = models.ForeignKey(Insumos, on_delete=models.SET_NULL, null=True) 
     fk_id_control_fitosanitario = models.ForeignKey(Control_fitosanitario, on_delete=models.SET_NULL, null=True)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2)
     

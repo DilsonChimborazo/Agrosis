@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.trazabilidad.models import Actividad, Realiza, Especie, TipoCultivo, Semillero, AsignacionActividades, Programacion, Notificacion, ControlUsoInsumo,CalendarioLunar, Ubicacion, Lote, Eras, Cultivo, Plantacion, Pea, Desarrollan, Tipo_residuos, Residuos, Control_fitosanitario
+from apps.trazabilidad.models import *
 
 #p
 
