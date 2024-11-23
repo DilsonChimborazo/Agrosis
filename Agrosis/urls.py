@@ -20,11 +20,6 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 #routers de la rama de iot 
-from apps.iot.sensores.api.router import router_Sensores
-from apps.iot.ubicacion.api.router import router_Ubicacion
-from apps.iot.lote.api.router import router_Lote
-from apps.iot.eras.api.router import router_Eras
-from apps.iot.mide.api.router import router_Mide
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -42,9 +37,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('api/sensores',include(router_Sensores.urls)),
-    path('api/ubicacion',include(router_Ubicacion.urls)),
-    path('api/lote', include(router_Lote.urls)),
-    path('api/eras',include(router_Eras.urls)),
-    path('api/mide',include(router_Mide.urls)),
+    path('api/',include(router.urls)),
 ]
