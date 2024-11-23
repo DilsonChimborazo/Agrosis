@@ -1,7 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 from apps.iot.mide.models import Mide
-from apps.iot.mide.api.serializers import MideSerializer
+from apps.iot.mide.api.serializers import leerMideSerializer,escribirMideSerializer
 
 class MideViewSet(ModelViewSet):
     queryset = Mide.objects.all()
-    serializer_class = MideSerializer
+    
+    def get_serializer_class(self):
+        if self.action in ['list','retrive']:
+            return leerMideSerializer
+        return escribirMideSerializer

@@ -6,4 +6,4 @@ class Ubicacion(models.Model):
     longitud = models.FloatField()
 
     def __str__(self):
-        return self.latitud, self.longitud
+        return f"({self.latitud}, {self.longitud})"
