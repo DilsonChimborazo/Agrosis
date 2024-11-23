@@ -40,10 +40,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'apps.usuario',
-    'apps.finanzas',
     'apps.trazabilidad',
     'apps.iot',
-    'apps.inventario'
+    'apps.inventario',
+    'apps.finanzas.genera',
+    'apps.finanzas.produccion'
 ]
 
 MIDDLEWARE = [
