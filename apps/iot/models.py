@@ -1,5 +1,5 @@
 from django.db import models
-from apps.trazabilidad.models import Eras
+from apps.plantacion.models import Eras
 # Create your models here.
 class Sensores(models.Model):
     nombre_sensor = models.CharField(max_length=50)

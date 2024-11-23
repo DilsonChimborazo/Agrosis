@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from apps.trazabilidad.models import *
-from apps. trazabilidad.api.serializers import *
+from apps.plantacion.models import *
+from apps. plantacion.api.serializers import *
 
 
 #p

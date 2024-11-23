@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from apps.trazabilidad.models import *
+from apps.plantacion.models import *
 
 #p
 

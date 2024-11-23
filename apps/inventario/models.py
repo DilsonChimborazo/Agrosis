@@ -1,5 +1,5 @@
 from django.db import models
-from apps.trazabilidad.models import *
+from apps.plantacion.models import *
 
 class Insumos(models.Model):
     unidad_medida=[

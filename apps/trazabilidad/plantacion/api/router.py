@@ -1,5 +1,5 @@
 from rest_framework.routers import DefaultRouter
-from apps.trazabilidad.api.views import *
+from apps.plantacion.api.views import *
 
 # Crear routers específicos para cada grupo de ViewSets
 
