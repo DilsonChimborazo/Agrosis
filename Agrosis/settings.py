@@ -41,7 +41,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'apps.usuario',
     'apps.finanzas',
-    'apps.trazabilidad',
+    #'apps.trazabilidad',
+    'apps.trazabilidad.actividad',
+    'apps.trazabilidad.control_fitosanitario',
+    'apps.trazabilidad.cultivo',
+    'apps.trazabilidad.desarrollan',
+    'apps.trazabilidad.pea',
+    'apps,trazabilidad.plantacion',
+    'apps.trazabilidad.residuos',
+    'apps.trazabilidad.tipo_residuos',
     'apps.iot',
     'apps.inventario'
 ]
