@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from apps.usuario.api.router import router
+from apps.usuarios.usuario.api.router import router
+from apps.usuarios.rol.api.router import router
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
