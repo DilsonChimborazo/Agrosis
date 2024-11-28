@@ -11,4 +11,4 @@ class Cultivo(models.Model):
     fk_id_semillero = models.ForeignKey(Semillero, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return f"Especie: {self.fk_id_especie} Semillaro: {self.fk_id_semillero}"
+        return self.nombre_cultivo
