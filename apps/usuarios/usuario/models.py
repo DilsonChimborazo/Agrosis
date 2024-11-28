@@ -3,7 +3,7 @@ from django.db import models
 from apps.usuarios.rol.models import Rol
 
 class Usuario(AbstractUser): 
-    rol = models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True)
+    fk_id_rol = models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True)
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
