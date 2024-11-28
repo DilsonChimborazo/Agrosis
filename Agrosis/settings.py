@@ -39,13 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'apps.usuario',
-    'apps.trazabilidad',
-    'apps.iot',
-    'apps.inventario',
-    'apps.finanzas.genera',
-    'apps.finanzas.produccion'
+
+
+    'apps.trazabilidad.realiza',
+    'apps.trazabilidad.especie',
+    'apps.trazabilidad.tipo_cultivo',
+    'apps.trazabilidad.semillero',
+    'apps.trazabilidad.asignacion_actividades',
+    'apps.trazabilidad.programacion',
+    'apps.trazabilidad.notificacion',
+    'apps.trazabilidad.calendario_lunar',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
