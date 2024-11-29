@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
     'apps.finanzas',
@@ -128,6 +129,14 @@ STATIC_ROOT = './static'
 
 AUTH_USER_MODEL = 'usuario.Usuario'  # 'usuario' es el nombre de la app y 'Usuario' es el nombre del modelo
 
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
+}
 
 
 # Default primary key field type
