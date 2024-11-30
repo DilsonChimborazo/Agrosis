@@ -39,9 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'apps.finanzas',
-    'apps.inventario',
-    'apps.iot',
+   
+   #Trazabilidad 1 Pacho
     'apps.trazabilidad.realiza',
     'apps.trazabilidad.especie',
     'apps.trazabilidad.tipo_cultivo',
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     'apps.trazabilidad.programacion',
     'apps.trazabilidad.notificacion',
     'apps.trazabilidad.calendario_lunar',
-    'apps.usuario',
+  
    
     
     
