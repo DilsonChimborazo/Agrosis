@@ -1,14 +1,13 @@
 from rest_framework.serializers import ModelSerializer
-from apps.finanzas.genera.models import Genera
+from apps.finanzas.venta.models import Venta 
 
-claas leerGeneraSerializer(ModelSerializer):
+claas leerVentaSerializer(ModelSerializer):
     fk_id_produccion = ProduccionSerializer()
-    fk_id_cultivo = CultivoSerializer()
     class Meta:
-        model = Genera
+        model = Venta
         fields = '__all__'  
 
-class escribirGeneraSerializer(ModelSerializer):
+class escribirVentaSerializer(ModelSerializer):
     class Meta:
-        model = Genera
-        fields = '__all__'
+        model = Venta
+        fields = '__all__'  

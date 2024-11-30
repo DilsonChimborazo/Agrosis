@@ -37,4 +37,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    
+    #FINANZAS
+    path('api/', include('apps.finanzas.genera.api.router')),
+    path('api/', include('apps.finanzas.produccion.api.router')),
+    path('api/', include('apps.finanzas.venta.api.router')),
 ]

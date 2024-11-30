@@ -39,12 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'apps.usuario',
-    'apps.trazabilidad',
-    'apps.iot',
-    'apps.inventario',
+    
+    #FINANZAS
     'apps.finanzas.genera',
-    'apps.finanzas.produccion'
+    'apps.finanzas.produccion',
+    'apps.finanzas.venta',
 ]
 
 MIDDLEWARE = [
