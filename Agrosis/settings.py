@@ -39,8 +39,39 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'apps.inventario'
+
+    #Trazabilidad 1 Pacho
+    'apps.trazabilidad.realiza',
+    'apps.trazabilidad.especie',
+    'apps.trazabilidad.tipo_cultivo',
+    'apps.trazabilidad.semillero',
+    'apps.trazabilidad.asignacion_actividades',
+    'apps.trazabilidad.programacion',
+    'apps.trazabilidad.notificacion',
+    'apps.trazabilidad.calendario_lunar',
+    #IOT
+    'apps.iot.eras'
+    'apps.iot.lote'
+    'apps.iot.mide'
+    'apps.iot.sensores'
+    'apps.iot.ubicacion'
+    #Finazas
+    'apps.finanzas.genera'
+    'apps.finanzas.Produccion'
+    'apps.finanzas.ventas'
+    #usuario
+    'rest_framework_simplejwt',
+    'apps.usuarios.usuario',
+    'apps.usuarios.rol',
+    #Inventario
+    'apps.inventario.control_usa_insumo'
+    'apps.inventario.herramientas'
+    'apps.inventario.insumo'
+    'apps.inventario.requiere'
+    'apps.inventario.utiliza'
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,10 +109,15 @@ WSGI_APPLICATION = 'Agrosis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Agrosis',  
+        'USER': 'postgres',                
+        'PASSWORD': 'adso2024',          
+        'HOST': 'localhost',                  
+        'PORT': '5432',                       
     }
 }
+
 
 
 # Password validation
@@ -121,7 +157,17 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = './static'
 
-AUTH_USER_MODEL = 'usuario.Usuario'
+AUTH_USER_MODEL = 'usuario.Usuario'  # 'usuario' es el nombre de la app y 'Usuario' es el nombre del modelo
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
