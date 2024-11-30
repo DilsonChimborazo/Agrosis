@@ -39,16 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    
+    #FINANZAS
+    'apps.finanzas.genera',
+    'apps.finanzas.produccion',
+    'apps.finanzas.venta',
 
-
-    'apps.trazabilidad.realiza',
-    'apps.trazabilidad.especie',
-    'apps.trazabilidad.tipo_cultivo',
-    'apps.trazabilidad.semillero',
-    'apps.trazabilidad.asignacion_actividades',
-    'apps.trazabilidad.programacion',
-    'apps.trazabilidad.notificacion',
-    'apps.trazabilidad.calendario_lunar',
 ]
 
 

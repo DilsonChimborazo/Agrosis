@@ -16,14 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from apps.trazabilidad.asignacion_actividades.api.router import routerAsignacion_actividades
-from apps.trazabilidad.calendario_lunar.api.router import routerCalendario_lunar
-from apps.trazabilidad.especie.api.router import routerEspecie
-from apps.trazabilidad.notificacion.api.router import routerNotificacion
-from apps.trazabilidad.programacion.api.router import routerProgramacion
-from apps.trazabilidad.realiza.api.router import routerRealiza
-from apps.trazabilidad.semillero.api.router import routerSemillero
-from apps.trazabilidad.tipo_cultivo.api.router import routerTipo_cultivo
+
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -42,17 +35,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-
-    path('api/', include(routerAsignacion_actividades.urls)),
-    path('api/', include(routerCalendario_lunar.urls)),
-    path('api/', include(routerEspecie.urls)),
-    path('api/', include(routerRealiza.urls)),
-    path('api/', include(routerTipo_cultivo.urls)),
-    path('api/', include(routerSemillero.urls)),
-    path('api/', include(routerProgramacion.urls)),
-    path('api/', include(routerNotificacion.urls)),
-   
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    
+    #FINANZAS
+    path('api/', include('apps.finanzas.genera.api.router')),
+    path('api/', include('apps.finanzas.produccion.api.router')),
+    path('api/', include('apps.finanzas.venta.api.router')),
 ]
