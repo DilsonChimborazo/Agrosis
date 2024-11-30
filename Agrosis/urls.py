@@ -19,8 +19,6 @@ from django.urls import path,include
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-#routers de la rama de iot 
-from apps.iot.mide.api.router import router
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -38,5 +36,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('api/',include(router.urls)),
+    path('', include('apps.iot.mide.urls')),
+    path('', include('apps.iot.eras.urls')),
+    path('', include('apps.iot.lote.urls')),
+    path('', include('apps.iot.sensores.urls')),
+    path('', include('apps.iot.ubicacion.urls')),
 ]
