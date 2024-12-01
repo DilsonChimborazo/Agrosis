@@ -1,15 +1,16 @@
 from rest_framework.serializers import ModelSerializer
 from apps.trazabilidad.cultivo.models import Cultivo
-from apps.trazabilidad.especie.api.serializers import EspecieSerializer 
+from apps.trazabilidad.especie.api.serializers import LeerEspecieSerializer 
+from apps.trazabilidad.semillero.api.serializers import LeerSemilleroSerializer
 
-class CultivoSerializer(ModelSerializer):
-    fk_id_especie = EspecieSerializer() 
-    fk_id_semillero = SemilleroSerializer()
+class LeerCultivoSerializer(ModelSerializer):
+    fk_id_especie = LeerEspecieSerializer() 
+    fk_id_semillero = LeerSemilleroSerializer()
     class Meta:
         model = Cultivo
         fields = '__all__'
 
-class escribirCultivoSerializer(ModelSerializer):
+class EscribirCultivoSerializer(ModelSerializer):
     class Meta:
         model = Cultivo
         fields = '__all__'

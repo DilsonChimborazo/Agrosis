@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 from apps.trazabilidad.control_fitosanitario.models import Control_fitosanitario
-from apps.trazabilidad.desarrollan.api.serializers import DesarrollanSerializer 
+from apps.trazabilidad.desarrollan.api.serializers import LeerDesarrollanSerializer 
 
-class Control_fitosanitarioSerializer(ModelSerializer):
-    fk_id_desarrollan = DesarrollanSerializer() 
+class LeerControl_fitosanitarioSerializer(ModelSerializer):
+    fk_id_desarrollan = LeerDesarrollanSerializer() 
     class Meta:
         model = Control_fitosanitario
         fields = '__all__'

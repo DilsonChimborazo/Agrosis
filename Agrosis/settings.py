@@ -39,9 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'apps.usuario',
-    'apps.finanzas',
-    #'apps.trazabilidad',
+    
+    #Trazabilidad 2 xiomara
     'apps.trazabilidad.actividad',
     'apps.trazabilidad.control_fitosanitario',
     'apps.trazabilidad.cultivo',
@@ -50,8 +49,7 @@ INSTALLED_APPS = [
     'apps,trazabilidad.plantacion',
     'apps.trazabilidad.residuos',
     'apps.trazabilidad.tipo_residuos',
-    'apps.iot',
-    'apps.inventario'
+    
 ]
 
 MIDDLEWARE = [
