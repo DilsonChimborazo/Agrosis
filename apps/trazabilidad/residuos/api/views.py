@@ -1,8 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAutenticated
 from apps.trazabilidad.residuos.models import Residuos
 from apps.trazabilidad.residuos.api.serializers import LeerResiduosSerializer, escribirResiduosSerializer
 
 class ResiduosViewSet(ModelViewSet):
+    permissions_clases = [IsAutenticated]
     queryset = Residuos.objects.all()
     
     def get_serializer_class(self):

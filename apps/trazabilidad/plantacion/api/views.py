@@ -1,8 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAutenticated
 from apps.trazabilidad.plantacion.models import Plantacion
 from apps.trazabilidad.plantacion.api.serializers import LeerPlantacionSerializer, escribirPlantacionSerializer
 
 class PlantacionViewSet(ModelViewSet):
+    permissions_clases = [IsAutenticated]
     queryset = Plantacion.objects.all()
     
     def get_serializer_class(self):
