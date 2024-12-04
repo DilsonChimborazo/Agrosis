@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'apps.finanzas.genera',
     'apps.finanzas.produccion',
     'apps.finanzas.venta',
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
