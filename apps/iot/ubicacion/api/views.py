@@ -7,3 +7,4 @@ class UbicacionViewSet(ModelViewSet):
     queryset = Ubicacion.objects.all()
     serializer_class = UbicacionSerializer
     permission_classes = [IsAuthenticated]
+
