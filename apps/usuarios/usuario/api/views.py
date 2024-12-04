@@ -5,7 +5,7 @@ from apps.usuarios.usuario.api.permissions import IsUsuarioReadOnly
 from rest_framework.permissions import IsAuthenticated
 
 class UsuarioViewsSet(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsUsuarioReadOnly]
     queryset = Usuario.objects.all()
 
     def get_serializer_class(self):
