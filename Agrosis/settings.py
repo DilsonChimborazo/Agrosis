@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+<<<<<<< HEAD
     'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
@@ -51,7 +52,16 @@ INSTALLED_APPS = [
     'apps.iot.eras',
     'apps.iot.ubicacion',
     'apps.inventario',
+=======
+    
+    #FINANZAS
+    'apps.finanzas.genera',
+    'apps.finanzas.produccion',
+    'apps.finanzas.venta',
+
+>>>>>>> Finanzas
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,7 @@
 
 from django.contrib import admin
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.urls import path,include
 =======
 from django.urls import path, include
@@ -11,6 +12,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 >>>>>>> usuario
+=======
+from django.urls import path, include
+
+
+>>>>>>> Finanzas
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
@@ -34,6 +40,7 @@ urlpatterns = [
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('', include('apps.iot.mide.urls')),
     path('', include('apps.iot.eras.urls')),
     path('', include('apps.iot.lote.urls')),
@@ -43,6 +50,13 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 >>>>>>> usuario
+=======
+    
+    #FINANZAS
+    path('api/', include('apps.finanzas.genera.api.router')),
+    path('api/', include('apps.finanzas.produccion.api.router')),
+    path('api/', include('apps.finanzas.venta.api.router')),
+>>>>>>> Finanzas
 ]
 
 
