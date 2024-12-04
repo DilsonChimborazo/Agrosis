@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
@@ -58,6 +59,10 @@ INSTALLED_APPS = [
 =======
    
    #Trazabilidad 1 Pacho
+=======
+
+    #Trazabilidad 1 Pacho
+>>>>>>> inventario
     'apps.trazabilidad.realiza',
     'apps.trazabilidad.especie',
     'apps.trazabilidad.tipo_cultivo',
@@ -66,6 +71,7 @@ INSTALLED_APPS = [
     'apps.trazabilidad.programacion',
     'apps.trazabilidad.notificacion',
     'apps.trazabilidad.calendario_lunar',
+<<<<<<< HEAD
   
    
 >>>>>>> Trazabilidad
@@ -89,6 +95,29 @@ INSTALLED_APPS = [
     'apps.trazabilidad.tipo_residuos',
     
 >>>>>>> Trazabilidad2
+=======
+    #IOT
+    'apps.iot.eras'
+    'apps.iot.lote'
+    'apps.iot.mide'
+    'apps.iot.sensores'
+    'apps.iot.ubicacion'
+    #Finazas
+    'apps.finanzas.genera'
+    'apps.finanzas.Produccion'
+    'apps.finanzas.ventas'
+    #usuario
+    'rest_framework_simplejwt',
+    'apps.usuarios.usuario',
+    'apps.usuarios.rol',
+    #Inventario
+    'apps.inventario.control_usa_insumo'
+    'apps.inventario.herramientas'
+    'apps.inventario.insumo'
+    'apps.inventario.requiere'
+    'apps.inventario.utiliza'
+
+>>>>>>> inventario
 ]
 
 
@@ -128,10 +157,15 @@ WSGI_APPLICATION = 'Agrosis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Agrosis',  
+        'USER': 'postgres',                
+        'PASSWORD': 'adso2024',          
+        'HOST': 'localhost',                  
+        'PORT': '5432',                       
     }
 }
+
 
 
 # Password validation
