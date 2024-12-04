@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
@@ -53,6 +54,20 @@ INSTALLED_APPS = [
     'apps.iot.ubicacion',
     'apps.inventario',
 =======
+=======
+   
+   #Trazabilidad 1 Pacho
+    'apps.trazabilidad.realiza',
+    'apps.trazabilidad.especie',
+    'apps.trazabilidad.tipo_cultivo',
+    'apps.trazabilidad.semillero',
+    'apps.trazabilidad.asignacion_actividades',
+    'apps.trazabilidad.programacion',
+    'apps.trazabilidad.notificacion',
+    'apps.trazabilidad.calendario_lunar',
+  
+   
+>>>>>>> Trazabilidad
     
     #FINANZAS
     'apps.finanzas.genera',
