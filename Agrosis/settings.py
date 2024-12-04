@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'drf_yasg',
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
@@ -75,6 +76,19 @@ INSTALLED_APPS = [
     'apps.finanzas.venta',
 
 >>>>>>> Finanzas
+=======
+    
+    #Trazabilidad 2 xiomara
+    'apps.trazabilidad.actividad',
+    'apps.trazabilidad.control_fitosanitario',
+    'apps.trazabilidad.cultivo',
+    'apps.trazabilidad.desarrollan',
+    'apps.trazabilidad.pea',
+    'apps,trazabilidad.plantacion',
+    'apps.trazabilidad.residuos',
+    'apps.trazabilidad.tipo_residuos',
+    
+>>>>>>> Trazabilidad2
 ]
 
 
