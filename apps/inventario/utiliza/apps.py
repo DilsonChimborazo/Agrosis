@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class UtilizaConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'utiliza'
+    name = 'apps.inventario.utiliza'

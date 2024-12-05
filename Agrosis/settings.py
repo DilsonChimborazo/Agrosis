@@ -39,30 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    
+    #usuario
     'rest_framework_simplejwt',
     'apps.usuarios.usuario',
     'apps.usuarios.rol',
-    'apps.finanzas',
-    'apps.trazabilidad',
+
     #apps de iot 
     'apps.iot.sensores',
     'apps.iot.mide',
     'apps.iot.lote',
     'apps.iot.eras',
     'apps.iot.ubicacion',
-    'apps.inventario',
-=======
-=======
-   
-   #Trazabilidad 1 Pacho
-=======
 
     #Trazabilidad 1 Pacho
->>>>>>> inventario
     'apps.trazabilidad.realiza',
     'apps.trazabilidad.especie',
     'apps.trazabilidad.tipo_cultivo',
@@ -71,18 +61,11 @@ INSTALLED_APPS = [
     'apps.trazabilidad.programacion',
     'apps.trazabilidad.notificacion',
     'apps.trazabilidad.calendario_lunar',
-<<<<<<< HEAD
-  
-   
->>>>>>> Trazabilidad
-    
+
     #FINANZAS
     'apps.finanzas.genera',
     'apps.finanzas.produccion',
     'apps.finanzas.venta',
-
->>>>>>> Finanzas
-=======
     
     #Trazabilidad 2 xiomara
     'apps.trazabilidad.actividad',
@@ -93,31 +76,13 @@ INSTALLED_APPS = [
     'apps,trazabilidad.plantacion',
     'apps.trazabilidad.residuos',
     'apps.trazabilidad.tipo_residuos',
-    
->>>>>>> Trazabilidad2
-=======
-    #IOT
-    'apps.iot.eras'
-    'apps.iot.lote'
-    'apps.iot.mide'
-    'apps.iot.sensores'
-    'apps.iot.ubicacion'
-    #Finazas
-    'apps.finanzas.genera'
-    'apps.finanzas.Produccion'
-    'apps.finanzas.ventas'
-    #usuario
-    'rest_framework_simplejwt',
-    'apps.usuarios.usuario',
-    'apps.usuarios.rol',
-    #Inventario
-    'apps.inventario.control_usa_insumo'
-    'apps.inventario.herramientas'
-    'apps.inventario.insumo'
-    'apps.inventario.requiere'
-    'apps.inventario.utiliza'
 
->>>>>>> inventario
+    #Inventario
+    'apps.inventario.control_usa_insumo',
+    'apps.inventario.herramientas',
+    'apps.inventario.insumo',
+    'apps.inventario.requiere',
+    'apps.inventario.utiliza',
 ]
 
 
