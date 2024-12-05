@@ -1,10 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
 from apps.trazabilidad.desarrollan.models import Desarrollan
-from rest_framework.permissions import IsAutenticated
+from rest_framework.permissions import IsAuthenticated
 from apps.trazabilidad.desarrollan.api.serializers import LeerDesarrollanSerializer, escribirDesarrollanSerializer
 
 class DesarrollanViewSet(ModelViewSet):
-    permissions_clases = [IsAutenticated]
+    permissions_clases = [IsAuthenticated]
     queryset = Desarrollan.objects.all()
     
     def get_serializer_class(self):
