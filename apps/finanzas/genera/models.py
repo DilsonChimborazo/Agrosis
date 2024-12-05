@@ -1,4 +1,6 @@
 from django.db import models
+from apps.trazabilidad.cultivo.models import Cultivo
+from apps.finanzas.produccion.models import Produccion
 
 # Create your models here.
 

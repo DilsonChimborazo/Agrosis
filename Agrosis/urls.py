@@ -15,34 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 from django.urls import path,include
-=======
-from django.urls import path, include
+#rutas de usuario
 from apps.usuarios.usuario.api.router import routerUsuario
 from apps.usuarios.rol.api.router import routerRol
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
->>>>>>> usuario
-=======
-from django.urls import path, include
-=======
-from django.urls import path 
-from django.urls import path, include 
 
->>>>>>> inventario
-
-
->>>>>>> Finanzas
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-=======
-from django.urls import path, include
+
+#rutas de trazabilidad
 from apps.trazabilidad.actividad.api.router import router_actividad
 from apps.trazabilidad.cultivo.api.router import router_cultivo
 from apps.trazabilidad.residuos.api.router import router_residuos
@@ -51,11 +37,15 @@ from apps.trazabilidad.control_fitosanitario.api.router import router_control_fi
 from apps.trazabilidad.desarrollan.api.router import router_desarrollan
 from apps.trazabilidad.plantacion.api.router import router_plantacion
 from apps.trazabilidad.pea.api.router import router_pea
+from apps.trazabilidad.asignacion_actividades.api.router import routerAsignacion_actividades
+from apps.trazabilidad.calendario_lunar.api.router import routerCalendario_lunar
+from apps.trazabilidad.especie.api.router import routerEspecie
+from apps.trazabilidad.notificacion.api.router import routerNotificacion
+from apps.trazabilidad.programacion.api.router import routerProgramacion
+from apps.trazabilidad.realiza.api.router import routerRealiza
+from apps.trazabilidad.semillero.api.router import routerSemillero
+from apps.trazabilidad.tipo_cultivo.api.router import routerTipo_cultivo
 
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi 
-
->>>>>>> Trazabilidad2
 
 
 schema_view = get_schema_view(
@@ -71,48 +61,44 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-<<<<<<< HEAD
     path('admin/', admin.site.urls),
+    #USUARIO
     path('api/', include(routerUsuario.urls)),
     path('api/', include(routerRol.urls)),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    
+    #IOT
     path('', include('apps.iot.mide.urls')),
     path('', include('apps.iot.eras.urls')),
     path('', include('apps.iot.lote.urls')),
     path('', include('apps.iot.sensores.urls')),
     path('', include('apps.iot.ubicacion.urls')),
-=======
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
->>>>>>> usuario
-=======
     
     #FINANZAS
     path('api/', include('apps.finanzas.genera.api.router')),
     path('api/', include('apps.finanzas.produccion.api.router')),
     path('api/', include('apps.finanzas.venta.api.router')),
->>>>>>> Finanzas
-=======
-   path('admin/', admin.site.urls),
-   
-   path('api/', include(router_actividad.urls)),
-   path('api/', include(router_cultivo.urls)),
-   path('api/', include(router_tipo_residuos.urls)),
-   path('api/', include(router_control_fitosanitario.urls)),
-   path('api/', include(router_desarrollan.urls)),
-   path('api/', include(router_plantacion.urls)),
-   path('api/', include(router_pea.urls)),
-   path('api/', include(router_residuos.urls)),
-   
-   path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-   path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-   
->>>>>>> Trazabilidad2
-=======
+
+    #TRAZABILIDAD
+    path('api/', include(router_actividad.urls)),
+    path('api/', include(router_cultivo.urls)),
+    path('api/', include(router_tipo_residuos.urls)),
+    path('api/', include(router_control_fitosanitario.urls)),
+    path('api/', include(router_desarrollan.urls)),
+    path('api/', include(router_plantacion.urls)),
+    path('api/', include(router_pea.urls)),
+    path('api/', include(router_residuos.urls)),
+    path('api/', include(routerAsignacion_actividades.urls)),
+    path('api/', include(routerCalendario_lunar.urls)),
+    path('api/', include(routerEspecie.urls)),
+    path('api/', include(routerRealiza.urls)),
+    path('api/', include(routerTipo_cultivo.urls)),
+    path('api/', include(routerSemillero.urls)),
+    path('api/', include(routerProgramacion.urls)),
+    path('api/', include(routerNotificacion.urls)),
 
     #INVENTARIO
     path('api/', include('apps.inventario.control_usa_inventario.api.router')),
@@ -120,5 +106,4 @@ urlpatterns = [
     path('api/', include('apps.inventario.insumo.api.router')),
     path('api/', include('apps.inventario.requiere.api.router')),
     path('api/', include('apps.inventario.utiliza.api.router')),
->>>>>>> inventario
 ]

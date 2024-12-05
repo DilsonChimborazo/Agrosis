@@ -1,5 +1,5 @@
 from django.db import models
-
+from apps.finanzas.produccion.models import Produccion
 # Create your models here.
 
 class Venta(models.Model):

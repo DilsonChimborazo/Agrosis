@@ -73,7 +73,7 @@ INSTALLED_APPS = [
     'apps.trazabilidad.cultivo',
     'apps.trazabilidad.desarrollan',
     'apps.trazabilidad.pea',
-    'apps,trazabilidad.plantacion',
+    'apps.trazabilidad.plantacion',
     'apps.trazabilidad.residuos',
     'apps.trazabilidad.tipo_residuos',
 
