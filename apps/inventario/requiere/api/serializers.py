@@ -5,7 +5,7 @@ from apps.trazabilidad.asignacion_actividades.api.serializers import Asignacion_
 
 class LeerRequiereSerializer (ModelSerializer):
     fk_Id_herramientas = HerramientasSerializer ()
-    fk_id_asignacion_actividades =  Asignacion_actividades()
+    fk_id_asignaciona_actividades =  Asignacion_actividades()
     class Meta :
         model = Requiere
         fields = '__all__'

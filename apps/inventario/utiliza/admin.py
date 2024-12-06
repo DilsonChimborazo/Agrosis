@@ -1,3 +1,7 @@
 from django.contrib import admin
+from apps.inventario.utiliza.models import Utiliza 
 
-# Register your models here.
+@admin.register(Utiliza)
+class UtilizaAdmin(admin.ModelAdmin):
+    list_display = ('fk_id_insumo','fk_id_asignacion_actividades') 
+    

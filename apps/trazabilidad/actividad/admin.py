@@ -1,3 +1,6 @@
 from django.contrib import admin
+from apps.trazabilidad.actividad.models import Actividad
 
-# Register your models here.
+@admin.register(Actividad)
+class ActividadAdmin(admin.ModelAdmin):
+    list_display = ('nombre_actividad', 'descripcion') 

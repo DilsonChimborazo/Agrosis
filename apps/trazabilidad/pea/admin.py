@@ -1,3 +1,6 @@
 from django.contrib import admin
+from apps.trazabilidad.pea.models import Pea 
 
-# Register your models here.
+@admin.register(Pea)
+class PeaAdmin(admin.ModelAdmin):
+    list_display = ('nombre_pea', 'descripcion') 
