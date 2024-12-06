@@ -1,10 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAutenticated
+from rest_framework.permissions import IsAuthenticated
 from apps.trazabilidad.tipo_cultivo.models import Tipo_cultivo
 from apps.trazabilidad.tipo_cultivo.api.serializers import LeerTipo_cultivoSerializer, EscribirTipo_cultivoSerializer
 
 class Tipo_cultivoModelViewSet(ModelViewSet):
-    permissions_clases = [IsAutenticated]
+    permissions_clases = [IsAuthenticated]
     queryset = Tipo_cultivo.objects.all()
 
     def get_serializer_class(self):

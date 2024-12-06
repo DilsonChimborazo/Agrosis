@@ -5,7 +5,4 @@ from apps.trazabilidad.asignacion_actividades.api.views import Asignacion_activi
 routerAsignacion_actividades = DefaultRouter()
 routerAsignacion_actividades.register(prefix='asignaciones_actividades', viewset=Asignacion_actividadesModelViewSet, basename='asignaciones_actividades')
 
-# Exportar los routers como un diccionario
-routers = {
-    'asignacion_actividades': routerAsignacion_actividades,
-}
+

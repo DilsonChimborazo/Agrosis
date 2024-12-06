@@ -15,8 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 from django.urls import path,include
+
 #rutas de usuario
 from apps.usuarios.usuario.api.router import routerUsuario
 from apps.usuarios.rol.api.router import routerRol
@@ -24,9 +26,6 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
 
 #rutas de trazabilidad
 from apps.trazabilidad.actividad.api.router import router_actividad
@@ -46,18 +45,35 @@ from apps.trazabilidad.realiza.api.router import routerRealiza
 from apps.trazabilidad.semillero.api.router import routerSemillero
 from apps.trazabilidad.tipo_cultivo.api.router import routerTipo_cultivo
 
+#rutas de finanzas
+from apps.finanzas.genera.api.router import router_Genera
+from apps.finanzas.produccion.api.router import router_produccion
+from apps.finanzas.venta.api.router import router_venta
 
+#rutas de inventario
+from apps.inventario.control_usa_insumo.api.routers import router_usa
+from apps.inventario.herramientas.api.routers import router_herramientas
+from apps.inventario.insumo.api.routers import router_insumo
+from apps.inventario.requiere.api.routers import router_requiere
+from apps.inventario.utiliza.api.routers import router_utiliza
+
+#rutas de IoT
+from apps.iot.eras.api.router import router_Eras
+from apps.iot.lote.api.router import router_Lote
+from apps.iot.mide.api.router import router_mide
+from apps.iot.sensores.api.router import router_Sensores
+from apps.iot.ubicacion.api.router import router_Ubicacion
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="documentacion API",
-      default_version='v0.1',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
-      license=openapi.License(name="BSD License"),
-   ),
-   public=True
+    openapi.Info(
+        title="documentacion API",
+        default_version='v0.1',
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@snippets.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True
 )
 
 urlpatterns = [
@@ -71,16 +87,16 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     
     #IOT
-    path('', include('apps.iot.mide.urls')),
-    path('', include('apps.iot.eras.urls')),
-    path('', include('apps.iot.lote.urls')),
-    path('', include('apps.iot.sensores.urls')),
-    path('', include('apps.iot.ubicacion.urls')),
+    path('api/', include(router_Eras.urls)),
+    path('api/', include(router_Lote.urls)),
+    path('api/', include(router_mide.urls)), 
+    path('api/', include(router_Sensores.urls)),
+    path('api/', include(router_Ubicacion.urls)),
     
     #FINANZAS
-    path('api/', include('apps.finanzas.genera.api.router')),
-    path('api/', include('apps.finanzas.produccion.api.router')),
-    path('api/', include('apps.finanzas.venta.api.router')),
+    path('api/', include(router_Genera.urls)),
+    path('api/', include(router_produccion.urls)),
+    path('api/', include(router_venta.urls)),
 
     #TRAZABILIDAD
     path('api/', include(router_actividad.urls)),
@@ -101,9 +117,9 @@ urlpatterns = [
     path('api/', include(routerNotificacion.urls)),
 
     #INVENTARIO
-    path('api/', include('apps.inventario.control_usa_inventario.api.router')),
-    path('api/', include('apps.inventario.herramientas.api.router')),
-    path('api/', include('apps.inventario.insumo.api.router')),
-    path('api/', include('apps.inventario.requiere.api.router')),
-    path('api/', include('apps.inventario.utiliza.api.router')),
+    path('api/', include(router_usa.urls)),
+    path('api/', include(router_herramientas.urls)),
+    path('api/', include(router_insumo.urls)),
+    path('api/', include(router_requiere.urls)),
+    path('api/', include(router_utiliza.urls)),
 ]
