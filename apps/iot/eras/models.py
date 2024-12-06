@@ -7,4 +7,4 @@ class Eras(models.Model):
     fk_id_lote = models.ForeignKey(Lote, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.descripcion
+        return self.fk_id_lote

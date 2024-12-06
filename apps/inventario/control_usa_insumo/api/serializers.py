@@ -6,11 +6,11 @@ from apps.trazabilidad.control_fitosanitario.api.serializers import LeerControl_
 class LeerControlUsaInsumoSerializer (ModelSerializer):
     fk_id_insumo = InsumoSerializer ()
     fk_id_control_fitosanitario = LeerControl_fitosanitarioSerializer ()
-    class meta :
+    class Meta :
         model = ControlUsaInsumo
         fields = '__all__'
 
 class ControlUsaInsumoSereializer(ModelSerializer):
-    class meta:
+    class Meta:
         model = ControlUsaInsumo
         fields = '__all__'   

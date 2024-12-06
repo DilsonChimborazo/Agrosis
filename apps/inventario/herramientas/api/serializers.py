@@ -3,7 +3,7 @@ from apps.inventario.herramientas.models import Herramientas
 
 
 
-class HerramientasSereializer(ModelSerializer):
-    class meta:
+class HerramientasSerializer(ModelSerializer):
+    class Meta:
         model = Herramientas
         fields = '__all__'  

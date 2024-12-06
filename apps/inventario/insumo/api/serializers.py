@@ -3,6 +3,6 @@ from apps.inventario.insumo.models import Insumo
 
 
 class InsumoSerializer(ModelSerializer):
-    class meta:
+    class Meta:
         model = Insumo
         fields = '__all__'  

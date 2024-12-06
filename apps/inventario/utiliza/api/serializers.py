@@ -6,11 +6,11 @@ from apps.trazabilidad.asignacion_actividades.api.serializers import Asignacion_
 class LeerUtilizaSerializer (ModelSerializer):
     fk_id_insumo = InsumoSerializer()
     fk_id_asignacion_actividades =  Asignacion_actividades()
-    class meta :
+    class Meta :
         model = Utiliza 
         fields = '__all__'
 
 class UtilizaSereializer(ModelSerializer):
-    class meta:
+    class Meta:
         model = Utiliza
         fields = '__all__'  

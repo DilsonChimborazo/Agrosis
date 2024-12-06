@@ -1,16 +1,16 @@
 from rest_framework.serializers import ModelSerializer
 from apps.inventario.requiere.models import Requiere
-from apps.inventario.herramientas.api.serializers import HerramientasSereializer
+from apps.inventario.herramientas.api.serializers import HerramientasSerializer
 from apps.trazabilidad.asignacion_actividades.api.serializers import Asignacion_actividades
 
 class LeerRequiereSerializer (ModelSerializer):
-    fk_Id_herramientas = HerramientasSereializer ()
+    fk_Id_herramientas = HerramientasSerializer ()
     fk_id_asignacion_actividades =  Asignacion_actividades()
-    class meta :
+    class Meta :
         model = Requiere
         fields = '__all__'
 
 class RequiereSereializer(ModelSerializer):
-    class meta:
+    class Meta:
         model = Requiere
         fields = '__all__'  
