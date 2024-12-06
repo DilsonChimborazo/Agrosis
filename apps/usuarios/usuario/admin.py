@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from apps.usuarios.usuario.models import Usuario
+from apps.usuarios.usuario.models import Usuarios
 
-@admin.register(Usuario)
+@admin.register(Usuarios)
 class UserAdmin(BaseUserAdmin):
        fieldsets = (
         (None, {'fields':('username', 'password')}),

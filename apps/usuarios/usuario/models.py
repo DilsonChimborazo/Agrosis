@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from apps.usuarios.rol.models import Rol
 
-class Usuario(AbstractUser): 
+class Usuarios(AbstractUser): 
     fk_id_rol = models.ForeignKey(Rol, on_delete=models.SET_NULL, null=True)
     nombre = models.CharField(max_length=30)
     apellido = models.CharField(max_length=30)

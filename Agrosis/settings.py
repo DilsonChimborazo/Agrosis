@@ -170,7 +170,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = './static'
 
-AUTH_USER_MODEL = 'usuario.Usuario'  # 'usuario' es el nombre de la app y 'Usuario' es el nombre del modelo
+AUTH_USER_MODEL = 'usuario.Usuarios'  # 'usuario' es el nombre de la app y 'Usuario' es el nombre del modelo
 
 REST_FRAMEWORK = {
     
