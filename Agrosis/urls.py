@@ -112,7 +112,7 @@ urlpatterns = [
     path('api/especie', include(routerEspecie.urls)),
     path('api/realiza', include(routerRealiza.urls)),
     path('api/tipo_cultivo', include(routerTipo_cultivo.urls)),
-    path('api/semmillero', include(routerSemillero.urls)),
+    path('api/semillero', include(routerSemillero.urls)),
     path('api/programacion', include(routerProgramacion.urls)),
     path('api/notificacion', include(routerNotificacion.urls)),
 
