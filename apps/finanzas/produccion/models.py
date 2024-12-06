@@ -4,7 +4,7 @@ from django.db import models
 
 class Produccion(models.Model):
     id_produccion = models.AutoField(primary_key=True)  
-    cantidad_produccion = models.DecimalField(max_digits=10)  
+    cantidad_produccion = models.DecimalField(null=True,max_digits=20,decimal_places=10)
     fecha = models.DateField() 
 
     def __str__(self):
