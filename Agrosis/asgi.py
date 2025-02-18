@@ -8,9 +8,20 @@ https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 """
 
 import os
+import django
 
 from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Agrosis.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Agrosis.settings')  # Asegurar la configuración
+django.setup()  # 🔹 Inicializar Django antes de importar cualquier módulo relacionado con él
 
-application = get_asgi_application()
+from apps.iot.sensores.api.router import websocket_urlpatterns  # Importar después de django.setup()
+
+application = ProtocolTypeRouter({
+    "http": get_asgi_application(),
+    "websocket": AuthMiddlewareStack(  # Agregamos AuthMiddlewareStack para WebSockets autenticados
+        URLRouter(websocket_urlpatterns)
+    ),
+})

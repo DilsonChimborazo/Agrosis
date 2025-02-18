@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'channels',
     
     #usuario
     'rest_framework_simplejwt',
@@ -115,7 +117,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Agrosis.wsgi.application'
+# ASGI application (para Django Channels)
+ASGI_APPLICATION = 'Agrosis.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Solo para desarrollo
+    },
+}
 
 
 # Database
@@ -124,11 +133,14 @@ WSGI_APPLICATION = 'Agrosis.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Agrosis',  
+        'NAME': 'agrosis',  
         'USER': 'postgres',                
         'PASSWORD': 'adso2024',          
         'HOST': 'localhost',                  
-        'PORT': '5432',                       
+        'PORT': '5432',  
+        'OPTIONS': {
+            'client_encoding': 'UTF8',
+        },                     
     }
 }
 
