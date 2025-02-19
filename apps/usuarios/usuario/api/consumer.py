@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from apps.usuarios.usuario.models import Usuarios
 from asgiref.sync import sync_to_async
+from datetime import date, datetime
 
 class UsuariosConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -47,8 +48,20 @@ class UsuariosConsumer(AsyncWebsocketConsumer):
         """Consulta la base de datos para obtener la información del sensor"""
         try:
             usuario = Usuarios.objects.get(fk_id_rol = fk_id_rol)
+            rol = usuario.fk_id_rol
+
+            def format_date(fecha):
+                if isinstance(fecha, (date, datetime)):
+                    return fecha.strftime("%Y-%m-%d %H:%M:%S")
+                return fecha  
+
+            rol_data = {
+                "rol": rol.rol,
+                "actualizacion": format_date (rol.actualizacion),
+                "fecha_creacion": format_date (rol.fecha_creacion)
+            }if rol else None
             return {
-                "fk_id_rol": usuario.fk_id_rol.id if usuario.fk_id_rol else None,
+                "fk_id_rol": rol_data,
                 "nombre": usuario.nombre,
                 "apellido": usuario.apellido,
                 "email": usuario.email
