@@ -1,6 +1,9 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from apps.usuarios.rol.models import Rol
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from channels.layers import get_channel_layer
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -38,5 +41,26 @@ class Usuarios(AbstractUser):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
+    
+@receiver(post_save, sender=Usuarios)
+def enviar_datos_usuarios(sender, instance, **kwargs):
+    channel_layer = get_channel_layer()
+    data = {
+        "fk_id_rol": instance.fk_id_rol,
+        "nombre": instance.nombre,
+        "apellido": instance.apellido,
+        "email": instance.email,
+    }
+    async def send_data():
+        await channel_layer.group_send(
+            "usuarios",
+            {
+                "type": "usuarios_data",
+                "message": data
+            }
+        )
+
+        import asyncio
+        asyncio.run(send_data())
 
 
