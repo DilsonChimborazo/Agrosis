@@ -133,9 +133,9 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'agrosis_django',  
+        'NAME': 'agrosis',  
         'USER': 'postgres',                
-        'PASSWORD': '28782We',          
+        'PASSWORD': 'adso2024',          
         'HOST': 'localhost',                  
         'PORT': '5432',  
         'OPTIONS': {
