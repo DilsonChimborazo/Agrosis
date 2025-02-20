@@ -19,6 +19,8 @@ django.setup()  # 🔹 Inicializar Django antes de importar cualquier módulo re
 
 from apps.iot.sensores.api.router import websocket_urlpatterns  # Importar después de django.setup()
 from apps.usuarios.usuario.api.router import websocket_urlpatterns
+from apps.iot.eras.api.router import websocket_urlpatterns
+
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
