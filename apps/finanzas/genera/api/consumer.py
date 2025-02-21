@@ -1,9 +1,11 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from django.db.models import Sum
+from django.db.models import Sum, F
+from asgiref.sync import sync_to_async
 from apps.finanzas.venta.models import Venta
 from apps.finanzas.genera.models import Genera
 from apps.finanzas.produccion.models import Produccion
+from apps.trazabilidad.cultivo.models import Cultivo
 
 class GeneraConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -20,27 +22,71 @@ class GeneraConsumer(AsyncWebsocketConsumer):
         if action == "producto_mas_vendido":
             result = await self.get_producto_mas_vendido()
             await self.send(text_data=json.dumps({"producto_mas_vendido": result}))
+        
+        elif action == "producto_menos_vendido":
+            result = await self.get_producto_menos_vendido()
+            await self.send(text_data=json.dumps({"producto_menos_vendido": result}))
+        
+        elif action == "cultivo_mas_produce":
+            result = await self.get_cultivo_mas_produce()
+            await self.send(text_data=json.dumps({"cultivo_mas_produce": result}))
+        
+        elif action == "cultivo_menos_produce":
+            result = await self.get_cultivo_menos_produce()
+            await self.send(text_data=json.dumps({"cultivo_menos_produce": result}))
 
-        elif action == "cultivo_mas_generado":
-            result = await self.get_cultivo_mas_generado()
-            await self.send(text_data=json.dumps({"cultivo_mas_generado": result}))
-
-    async def get_producto_mas_vendido(self):
-        producto = Venta.objects.values('fk_id_produccion__id_produccion') \
-            .annotate(total_vendido=Sum('cantidad')) \
-            .order_by('-total_vendido') \
-            .first()
+    @sync_to_async
+    def get_producto_mas_vendido(self):
+        producto = Venta.objects.values(
+            'fk_id_produccion__genera__fk_id_cultivo__nombre_cultivo'
+        ).annotate(
+            total_vendido=Sum('cantidad'),
+            total_precio=Sum(F('cantidad') * F('precio_unidad'))  # Corregido a precio_unidad
+        ).order_by('-total_vendido').first()
         
         if producto:
-            return f"Producción ID {producto['fk_id_produccion__id_produccion']} con {producto['total_vendido']} unidades vendidas"
+            total_vendido = round(producto['total_vendido'], 2)
+            total_precio = round(producto['total_precio'], 2)
+            return f"{producto['fk_id_produccion__genera__fk_id_cultivo__nombre_cultivo']} con {total_vendido} unidades vendidas y un total de ${total_precio}"
         return "No hay datos de ventas"
 
-    async def get_cultivo_mas_generado(self):
-        cultivo = Genera.objects.values('fk_id_cultivo__nombre') \
-            .annotate(total_generado=Sum('fk_id_produccion__cantidad_produccion')) \
-            .order_by('-total_generado') \
-            .first()
+    @sync_to_async
+    def get_producto_menos_vendido(self):
+        producto = Venta.objects.values(
+            'fk_id_produccion__genera__fk_id_cultivo__nombre_cultivo'
+        ).annotate(
+            total_vendido=Sum('cantidad'),
+            total_precio=Sum(F('cantidad') * F('precio_unidad'))  # Corregido a precio_unidad
+        ).order_by('total_vendido').first()
+        
+        if producto:
+            total_vendido = round(producto['total_vendido'], 2)
+            total_precio = round(producto['total_precio'], 2)
+            return f"{producto['fk_id_produccion__genera__fk_id_cultivo__nombre_cultivo']} con {total_vendido} unidades vendidas y un total de ${total_precio}"
+        return "No hay datos de ventas"
 
+    @sync_to_async
+    def get_cultivo_mas_produce(self):
+        cultivo = Genera.objects.values(
+            'fk_id_cultivo__nombre_cultivo'
+        ).annotate(
+            total_produccion=Sum('fk_id_produccion__cantidad_produccion')
+        ).order_by('-total_produccion').first()
+        
         if cultivo:
-            return f"Cultivo {cultivo['fk_id_cultivo__nombre']} con {cultivo['total_generado']} unidades producidas"
+            total_produccion = round(cultivo['total_produccion'], 2)
+            return f"{cultivo['fk_id_cultivo__nombre_cultivo']} con {total_produccion} unidades producidas"
+        return "No hay datos de producción"
+
+    @sync_to_async
+    def get_cultivo_menos_produce(self):
+        cultivo = Genera.objects.values(
+            'fk_id_cultivo__nombre_cultivo'
+        ).annotate(
+            total_produccion=Sum('fk_id_produccion__cantidad_produccion')
+        ).order_by('total_produccion').first()
+        
+        if cultivo:
+            total_produccion = round(cultivo['total_produccion'], 2)
+            return f"{cultivo['fk_id_cultivo__nombre_cultivo']} con {total_produccion} unidades producidas"
         return "No hay datos de producción"

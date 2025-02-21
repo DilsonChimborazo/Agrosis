@@ -17,9 +17,11 @@ from channels.auth import AuthMiddlewareStack
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Agrosis.settings')  # Asegurar la configuración
 django.setup()  # 🔹 Inicializar Django antes de importar cualquier módulo relacionado con él
 
+
 from apps.iot.sensores.api.router import websocket_urlpatterns  # Importar después de django.setup()
 from apps.usuarios.usuario.api.router import websocket_urlpatterns
 from apps.iot.eras.api.router import websocket_urlpatterns
+from apps.finanzas.genera.api.router import websocket_urlpatterns # Importar después de django.setup()
 
 
 application = ProtocolTypeRouter({
