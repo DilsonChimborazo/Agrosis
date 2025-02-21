@@ -24,17 +24,8 @@ class SensoresConsumer(AsyncWebsocketConsumer):
             sensor_data = await self.get_sensor_data(sensor_nombre)
 
             if sensor_data:
-                # Responder con los datos actuales del sensor
+                # Enviar datos al cliente directamente
                 await self.send(text_data=json.dumps({"message": sensor_data}))
-
-                # También suscribimos al usuario a actualizaciones en tiempo real
-                await self.channel_layer.group_send(
-                    "sensores",
-                    {
-                        "type": "sensor_data",
-                        "message": sensor_data
-                    }
-                )
             else:
                 await self.send(text_data=json.dumps({"error": "Sensor no encontrado"}))
 
@@ -51,8 +42,7 @@ class SensoresConsumer(AsyncWebsocketConsumer):
                 "nombre_sensor": sensor.nombre_sensor,
                 "medida_minima": sensor.medida_minima,
                 "medida_maxima": sensor.medida_maxima,
-                "dato enviado": sensor.medida_maxima / 3 
+                "dato_enviado": sensor.medida_maxima / 3 
             }
         except Sensores.DoesNotExist:
             return None
-
