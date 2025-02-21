@@ -19,7 +19,6 @@ class PeaConsumer(AsyncWebsocketConsumer):
         
         if "nombre_pea" in data:
             pea_nombre = data["nombre_pea"]
-
             
             pea_data = await self.get_pea_data(pea_nombre)
 
@@ -27,7 +26,6 @@ class PeaConsumer(AsyncWebsocketConsumer):
                
                 await self.send(text_data=json.dumps({"message": pea_data}))
 
-               
                 await self.channel_layer.group_send(
                     "pea",
                     {
@@ -50,8 +48,6 @@ class PeaConsumer(AsyncWebsocketConsumer):
             return {
                 "nombre_pea": pea.nombre_pea,
                 "descripcion": pea.descripcion,
-                
-                "dato enviado": pea.nombre_pea / 3 
             }
         except Pea.DoesNotExist:
             return None
