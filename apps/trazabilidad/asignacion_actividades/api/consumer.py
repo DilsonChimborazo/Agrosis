@@ -1,11 +1,14 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from apps.trazabilidad.asignacion_actividades.models import Asignacion_actividades  
+from apps.trazabilidad.asignacion_actividades.models import Asignacion_actividades
 from asgiref.sync import sync_to_async
+from apps.usuarios.usuario.models import Usuarios 
+from apps.trazabilidad.actividad.models import Actividad
 
 class Asignacion_actividadesConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         """Conexión WebSocket"""
+        # Usar un grupo único para la asignación de actividades
         await self.channel_layer.group_add("asignacion_actividades", self.channel_name)
         await self.accept()
 
@@ -17,41 +20,66 @@ class Asignacion_actividadesConsumer(AsyncWebsocketConsumer):
         """Maneja los mensajes entrantes desde el cliente"""
         data = json.loads(text_data)
 
-        if "nombre_asignacion_actividades" in data:
-            asignacion_actividades_nombre = data["nombre_asignacion_actividades"]
+        # Verificar que los datos necesarios estén presentes
+        if not all(key in data for key in ["fecha", "fk_id_actividad", "id_identificacion"]):
+            await self.send(text_data=json.dumps({"error": "Faltan datos necesarios para asignar la actividad."}))
+            return
 
-            # Obtener datos del asignacion_actividades de la base de datos
-            asignacion_actividades_data = await self.get_asignacion_actividades_data(asignacion_actividades_nombre)
+        fecha = data["fecha"]
+        fk_id_actividad = data["fk_id_actividad"]
+        id_identificacion = data["id_identificacion"]
 
-            if asignacion_actividades_data:
-                # Responder con los datos actuales del asignacion_actividades
-                await self.send(text_data=json.dumps({"message": asignacion_actividades_data}))
+        # Lógica para asignar la actividad
+        asignacion_actividades_data = await self.asignar_actividad(fecha, fk_id_actividad, id_identificacion)
 
-                # También suscribimos al usuario a actualizaciones en tiempo real
-                await self.channel_layer.group_send(
-                    "asignacion_actividades",
-                    {
-                        "type": "asignacion_actividades_data",
-                        "message": asignacion_actividades_data
-                    }
-                )
-            else:
-                await self.send(text_data=json.dumps({"error": "asignacion_actividades no encontrado"}))
+        if asignacion_actividades_data:
+            # Responder con los datos actuales de la asignación
+            await self.send(text_data=json.dumps({"message": asignacion_actividades_data}))
+
+            # Notificar a todos los usuarios conectados sobre la asignación de actividad
+            await self.channel_layer.group_send(
+                "asignacion_actividades",
+                {
+                    "type": "asignacion_actividades_data",
+                    "message": asignacion_actividades_data
+                }
+            )
+        else:
+            await self.send(text_data=json.dumps({"error": "No se pudo asignar la actividad"}))
 
     async def asignacion_actividades_data(self, event):
-        """Envia los datos del asignacion_actividades al cliente en tiempo real"""
+        """Envía los datos de asignación de actividad al cliente en tiempo real"""
         await self.send(text_data=json.dumps({"message": event["message"]}))
 
     @sync_to_async
-    def get_asignacion_actividades_data(self, fecha, fk_id_actividad, id_identificacion):
-        """Consulta la base de datos para obtener la información de asignacion_actividades"""
+    def asignar_actividad(self, fecha, fk_id_actividad, id_identificacion):
+        """Asigna la actividad en la base de datos y devuelve los datos"""
         try:
-            asignacion_actividades = asignacion_actividades.objects.get(fecha=fecha, fk_id_actividad=fk_id_actividad, id_identificacion=id_identificacion)
+            # Obtener la instancia de la actividad a partir del ID
+            actividad = Actividad.objects.get(id=fk_id_actividad)
+
+            # Obtener la instancia del usuario a partir del ID
+            usuario = Usuarios.objects.get(id=id_identificacion)
+
+            # Asignar la actividad al usuario
+            asignacion_actividades = Asignacion_actividades.objects.create(
+                fecha=fecha,
+                fk_id_actividad=actividad,  # Asigna la instancia de la actividad
+                id_identificacion=usuario
+            )
+
+            # Obtener el nombre de la actividad desde fk_id_actividad
+            actividad_nombre = asignacion_actividades.fk_id_actividad.nombre_actividad
+            usuario_nombre = usuario.nombre
+            usuario_apellido = usuario.apellido
+
             return {
-                "fecha": asignacion_actividades.fecha,
-                "fk_id_actividad": asignacion_actividades.fk_id_actividad,
-                "id_identificacion": asignacion_actividades.id_identificacion,
-                 
+                "mensaje": f"{usuario_nombre} {usuario_apellido} Se le ha asignado la actividad {actividad_nombre} para realizarse el dia {asignacion_actividades.fecha}."
             }
-        except asignacion_actividades.DoesNotExist:
-            return None
+
+        except Usuarios.DoesNotExist:
+            return {"error": "El usuario no existe."}
+        except Actividad.DoesNotExist:
+            return {"error": "La actividad no existe."}
+        except Exception as e:
+            return {"error": str(e)}

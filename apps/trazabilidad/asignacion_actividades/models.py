@@ -15,25 +15,3 @@ class Asignacion_actividades(models.Model):
     
     def __str__(self): 
         return f'{self.fk_id_actividad} - {self.id_identificacion}'
-
-
-@receiver(post_save, sender=Asignacion_actividades)
-def enviar_datos_asignacion_actividades(sender, instance, **kwargs):
-    channel_layer = get_channel_layer()
-    data = {
-        "fecha": instance.fecha,
-        "fk_id_actividad": instance.fk_id_actividad,
-        "id_identificacion": instance.id_identificacion
-        
-    }
-    async def send_data():
-        await channel_layer.group_send(
-            "asignacion_actividades",
-            {
-                "type": "asignacion_actividades_data",
-                "message": data
-            }
-        )
-    
-    import asyncio
-    asyncio.run(send_data())
