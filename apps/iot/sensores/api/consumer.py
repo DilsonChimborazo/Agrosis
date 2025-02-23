@@ -1,48 +1,56 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from apps.iot.sensores.models import Sensores  
-from asgiref.sync import sync_to_async
+from apps.iot.sensores.models import Sensores
+from apps.iot.mide.models import Mide
+from django.utils.timezone import now
 
-class SensoresConsumer(AsyncWebsocketConsumer):
+class SensorConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        """Conexión WebSocket"""
-        await self.channel_layer.group_add("sensores", self.channel_name)
         await self.accept()
+        self.group_name = "sensor_alerts"
+        await self.channel_layer.group_add(self.group_name, self.channel_name)
 
     async def disconnect(self, close_code):
-        """Desconexión WebSocket"""
-        await self.channel_layer.group_discard("sensores", self.channel_name)
+        await self.channel_layer.group_discard(self.group_name, self.channel_name)
 
     async def receive(self, text_data):
-        """Maneja los mensajes entrantes desde el cliente"""
         data = json.loads(text_data)
+        sensor_id = data.get("sensor_id")
+        valor_medicion = float(data.get("valor"))
 
-        if "nombre_sensor" in data:
-            sensor_nombre = data["nombre_sensor"]
+        sensor = await self.get_sensor(sensor_id)
 
-            # Obtener datos del sensor de la base de datos
-            sensor_data = await self.get_sensor_data(sensor_nombre)
+        if sensor:
+            if valor_medicion < sensor.medida_minima or valor_medicion > sensor.medida_maxima:
+                await self.send_alert(sensor, valor_medicion)
 
-            if sensor_data:
-                # Enviar datos al cliente directamente
-                await self.send(text_data=json.dumps({"message": sensor_data}))
-            else:
-                await self.send(text_data=json.dumps({"error": "Sensor no encontrado"}))
+            await self.save_measurement(sensor, valor_medicion)
 
-    async def sensor_data(self, event):
-        """Envia los datos del sensor al cliente en tiempo real"""
-        await self.send(text_data=json.dumps({"message": event["message"]}))
+    async def send_alert(self, sensor, valor):
+        message = {
+            "alerta": f"¡ALERTA! El sensor {sensor.nombre_sensor} {sensor.tipo_sensor} ha salido de su rango permitido.",
+            "valor": valor
+        }
+        await self.channel_layer.group_send(
+            self.group_name,
+            {
+                "type": "send_notification",
+                "message": message,
+            },
+        )
 
-    @sync_to_async
-    def get_sensor_data(self, nombre_sensor):
-        """Consulta la base de datos para obtener la información del sensor"""
-        try:
-            sensor = Sensores.objects.get(nombre_sensor=nombre_sensor)
-            return {
-                "nombre_sensor": sensor.nombre_sensor,
-                "medida_minima": sensor.medida_minima,
-                "medida_maxima": sensor.medida_maxima,
-                "dato_enviado": sensor.medida_maxima / 3 
-            }
-        except Sensores.DoesNotExist:
-            return None
+    async def send_notification(self, event):
+        await self.send(text_data=json.dumps(event["message"]))
+
+    @staticmethod
+    async def get_sensor(sensor_id):
+        return await Sensores.objects.filter(id=sensor_id).afirst()
+
+    @staticmethod
+    async def save_measurement(sensor, valor):
+        await Mide.objects.acreate(
+            fk_id_sensor=sensor,
+            fk_id_era=None,  # Puedes modificar esto según tu lógica
+            valor_medicion=valor,
+            fecha_medicion=now()
+        )
