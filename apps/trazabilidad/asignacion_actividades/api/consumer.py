@@ -2,13 +2,13 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from apps.trazabilidad.asignacion_actividades.models import Asignacion_actividades
 from asgiref.sync import sync_to_async
-from apps.usuarios.usuario.models import Usuarios 
+from apps.usuarios.usuario.models import Usuarios
 from apps.trazabilidad.actividad.models import Actividad
+from channels.layers import get_channel_layer
 
 class Asignacion_actividadesConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         """Conexión WebSocket"""
-        # Usar un grupo único para la asignación de actividades
         await self.channel_layer.group_add("asignacion_actividades", self.channel_name)
         await self.accept()
 
@@ -73,6 +73,7 @@ class Asignacion_actividadesConsumer(AsyncWebsocketConsumer):
             usuario_nombre = usuario.nombre
             usuario_apellido = usuario.apellido
 
+            # Crear el mensaje para notificación
             return {
                 "mensaje": f"{usuario_nombre} {usuario_apellido} Se le ha asignado la actividad {actividad_nombre} para realizarse el dia {asignacion_actividades.fecha}."
             }

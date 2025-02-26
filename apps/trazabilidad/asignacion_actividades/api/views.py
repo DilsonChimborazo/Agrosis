@@ -5,13 +5,12 @@ from rest_framework import status
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
 from apps.trazabilidad.asignacion_actividades.models import Asignacion_actividades
-from apps.trazabilidad.asignacion_actividades.api.serializers import (LeerAsignacion_actividadesSerializer,EscribirAsignacion_actividadesSerializer)
+from apps.trazabilidad.asignacion_actividades.api.serializers import (LeerAsignacion_actividadesSerializer, EscribirAsignacion_actividadesSerializer)
 from apps.usuarios.usuario.models import Usuarios
 from apps.trazabilidad.actividad.models import Actividad
 
-
 class Asignacion_actividadesModelViewSet(ModelViewSet):
-    permissions_clases = [IsAuthenticatedOrReadOnly]
+    permission_class = [IsAuthenticatedOrReadOnly] 
     queryset = Asignacion_actividades.objects.all()
 
     def get_serializer_class(self):
@@ -29,11 +28,12 @@ class Asignacion_actividadesModelViewSet(ModelViewSet):
             usuario = Usuarios.objects.get(id=asignacion.id_identificacion.id)
             actividad = Actividad.objects.get(id=asignacion.fk_id_actividad.id)
 
+            # Mensaje para la notificación WebSocket
             mensaje = {
-                "mensaje": f"{usuario.nombre} {usuario.apellido} Se le ha asignado la actividad {actividad.nombre_actividad} para realizarse el dia {asignacion.fecha}."
+                "mensaje": f"{usuario.nombre} {usuario.apellido} se le ha asignado la actividad {actividad.nombre_actividad} para realizarse el día {asignacion.fecha}."
             }
 
-            # 🔥 Notificación en tiempo real con WebSockets
+            # Notificación en tiempo real con WebSockets
             channel_layer = get_channel_layer()
             async_to_sync(channel_layer.group_send)(
                 "asignacion_actividades",  # Grupo WebSocket
@@ -43,5 +43,8 @@ class Asignacion_actividadesModelViewSet(ModelViewSet):
                 }
             )
 
-            return Response(mensaje, status=status.HTTP_201_CREATED)
+            # Devolver la respuesta con los datos serializados
+            return Response(serializer.data, status=status.HTTP_201_CREATED)  # Cambié `LeerAsignacion_actividadesSerializer` por `serializer.data`
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
